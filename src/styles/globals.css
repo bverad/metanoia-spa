@@ -1,0 +1,573 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Properties for Design System */
+:root {
+  /* Colors - matching Tailwind config */
+  --sage-50: #f6f7f3;
+  --sage-100: #e9ebe3;
+  --sage-200: #d4d8c9;
+  --sage-300: #b8bfa5;
+  --sage-400: #9ba382;
+  --sage-500: #7d8661;
+  --sage-600: #636b4d;
+  --sage-700: #4f553e;
+  --sage-800: #424734;
+  --sage-900: #38392d;
+
+  --cream-50: #fefcf9;
+  --cream-100: #fdf7ee;
+  --cream-200: #fbebd6;
+  --cream-300: #f7dab5;
+  --cream-400: #f2c088;
+  --cream-500: #eda55c;
+  --cream-600: #e18534;
+  --cream-700: #bc6726;
+  --cream-800: #965324;
+  --cream-900: #794420;
+
+  --copper-50: #fdf7f0;
+  --copper-100: #faeee0;
+  --copper-200: #f4dbc0;
+  --copper-300: #ebc095;
+  --copper-400: #e09d6b;
+  --copper-500: #d67c47;
+  --copper-600: #c86033;
+  --copper-700: #a74a28;
+  --copper-800: #864025;
+  --copper-900: #6e3621;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-neutral-800 bg-neutral-50 font-sans;
+    line-height: 1.6;
+  }
+
+  /* Premium Typography System */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-sage-900 font-bold leading-tight;
+    letter-spacing: -0.025em;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  }
+
+  /* Hero H1 - Maximum specificity */
+  section#hero h1,
+  #hero h1,
+  .hero-title {
+    font-size: clamp(3.5rem, 8vw, 8rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.055em !important;
+    line-height: 0.85 !important;
+    color: #38392d !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1, "ss02" 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Fallback H1 for other sections */
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 0.9 !important;
+    color: #38392d !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  }
+
+  /* Section H2 titles - Maximum specificity */
+  section h2,
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1.1 !important;
+    color: #38392d !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+    margin: 0 0 1.5rem 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Fallback H2 */
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;
+    color: #38392d !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;
+    color: var(--sage-900) !important;
+  }
+
+  h4 {
+    font-size: clamp(1.25rem, 2.5vw, 2rem) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--sage-900) !important;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl lg:text-2xl;
+    font-weight: 600;
+  }
+
+  h6 {
+    @apply text-base md:text-lg lg:text-xl;
+    font-weight: 600;
+  }
+
+  /* Enhanced Body Typography */
+  p {
+    @apply leading-relaxed;
+    color: rgb(64 64 64);
+    font-feature-settings: "kern" 1, "liga" 1;
+    font-size: clamp(1rem, 1.1vw, 1.125rem);
+    line-height: 1.75;
+  }
+
+  /* Premium Text Classes */
+  .text-display {
+    font-size: clamp(3.5rem, 8vw, 8rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.055em !important;
+    line-height: 0.85 !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  }
+
+  .text-hero {
+    font-size: clamp(1.25rem, 3vw, 2.5rem) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.015em !important;
+    line-height: 1.4 !important;
+    color: rgb(82 82 91) !important;
+  }
+
+  .text-large {
+    font-size: clamp(1.125rem, 2vw, 1.5rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .text-body-large {
+    font-size: clamp(1.125rem, 1.3vw, 1.25rem);
+    line-height: 1.7;
+    font-weight: 450;
+  }
+
+  .text-caption {
+    @apply text-sm md:text-base;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  /* Links */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Focus styles for accessibility */
+  .focus-visible:focus {
+    @apply outline-2 outline-sage-500 outline-offset-2 rounded;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Button styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, var(--sage-600), var(--sage-500));
+    box-shadow: 0 4px 12px rgb(125 134 97 / 0.3);
+  }
+
+  .btn-primary:hover {
+    @apply transform -translate-y-1;
+    box-shadow: 0 8px 20px rgb(125 134 97 / 0.4);
+  }
+
+  .btn-primary:active {
+    @apply transform translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-sage-700 bg-cream-100 border-2 border-sage-200 rounded-full transition-all duration-300;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-cream-200 border-sage-300 transform -translate-y-0.5;
+  }
+
+  /* Service card styles */
+  .service-card {
+    @apply bg-white border border-sage-100 rounded-xl p-6 transition-all duration-300;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+  }
+
+  .service-card:hover {
+    @apply border-sage-300 transform -translate-y-1;
+    box-shadow: 0 8px 24px rgb(125 134 97 / 0.15);
+  }
+
+  /* Price highlight */
+  .price-highlight {
+    @apply text-xl font-bold text-sage-700;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-full;
+    background: linear-gradient(135deg, var(--copper-100), var(--copper-200));
+    color: var(--copper-700);
+  }
+
+  /* Enhanced Section spacing */
+  .section-container {
+    @apply container mx-auto px-6 sm:px-8 lg:px-12 max-w-7xl;
+  }
+
+  /* Definitive Section Spacing System - Maximum specificity */
+  main section.section-spacing,
+  body section.section-spacing,
+  section[class*="section-spacing"] {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+    display: block !important;
+  }
+
+  main section.section-spacing-small,
+  body section.section-spacing-small,
+  section[class*="section-spacing-small"] {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+    display: block !important;
+  }
+
+  main section.section-spacing-large,
+  body section.section-spacing-large,
+  section[class*="section-spacing-large"] {
+    padding-top: 120px !important;
+    padding-bottom: 120px !important;
+    margin-top: 80px !important;
+    margin-bottom: 80px !important;
+    display: block !important;
+  }
+
+  /* Hero specific spacing - Maximum specificity */
+  main section.hero-spacing,
+  body section.hero-spacing,
+  section[class*="hero-spacing"],
+  section#hero {
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+    margin-top: 0 !important;
+    margin-bottom: 80px !important;
+    display: block !important;
+  }
+
+  /* Elegant hero bottom wave divider */
+  #hero + .hero-divider {
+    position: relative;
+    height: 80px;
+    margin-top: -40px;
+    pointer-events: none;
+  }
+
+  #hero + .hero-divider::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 100% at 50% 100%, rgba(125,134,97,0.08) 0%, rgba(255,255,255,0) 70%);
+  }
+
+  /* Additional section separation */
+  section.section-separator {
+    margin-top: 100px !important;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    section.section-spacing {
+      padding-top: 120px !important;
+      padding-bottom: 120px !important;
+      margin-top: 80px !important;
+      margin-bottom: 80px !important;
+    }
+
+    section.section-spacing-large {
+      padding-top: 160px !important;
+      padding-bottom: 160px !important;
+      margin-top: 100px !important;
+      margin-bottom: 100px !important;
+    }
+
+    section.hero-spacing {
+      padding-top: 140px !important;
+      padding-bottom: 140px !important;
+      margin-bottom: 100px !important;
+    }
+
+    section.section-separator {
+      margin-top: 120px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    section.section-spacing {
+      padding-top: 160px !important;
+      padding-bottom: 160px !important;
+      margin-top: 100px !important;
+      margin-bottom: 100px !important;
+    }
+
+    section.section-spacing-large {
+      padding-top: 200px !important;
+      padding-bottom: 200px !important;
+      margin-top: 120px !important;
+      margin-bottom: 120px !important;
+    }
+
+    section.hero-spacing {
+      padding-top: 180px !important;
+      padding-bottom: 180px !important;
+      margin-bottom: 120px !important;
+    }
+
+    section.section-separator {
+      margin-top: 140px !important;
+    }
+  }
+
+  /* Inner content spacing */
+  .content-spacing {
+    @apply space-y-8 lg:space-y-12 xl:space-y-16;
+  }
+
+  .content-spacing-large {
+    @apply space-y-12 lg:space-y-16 xl:space-y-20;
+  }
+
+  /* Navigation offset for fixed header */
+  .nav-offset {
+    @apply pt-16 lg:pt-20;
+  }
+
+  /* Floating WhatsApp button */
+  .floating-whatsapp {
+    @apply fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+  }
+
+  .floating-whatsapp:hover {
+    @apply transform scale-110;
+    box-shadow: 0 8px 24px rgb(37 211 102 / 0.4);
+  }
+
+  /* Organic shapes */
+  .organic-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  /* Section dividers */
+  .section-divider {
+    @apply h-px;
+    background: linear-gradient(90deg, transparent, var(--sage-200), transparent);
+  }
+
+  /* FAQ accordion */
+  .faq-item {
+    @apply border-b border-sage-100 last:border-b-0;
+  }
+
+  .faq-button {
+    @apply w-full text-left py-6 pr-8 text-lg font-medium text-sage-800 hover:text-sage-600 transition-colors;
+  }
+
+  .faq-content {
+    @apply pb-6 text-neutral-600 leading-relaxed;
+  }
+
+  /* Image placeholder */
+  .image-placeholder {
+    @apply flex items-center justify-center text-sage-400;
+    background: linear-gradient(135deg, var(--sage-100), var(--cream-100));
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Smooth scroll offset for anchor links */
+  .scroll-offset {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Hide scrollbar but maintain functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(125, 134, 97, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(125, 134, 97, 0.5);
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 640px) {
+  .btn-primary {
+    @apply px-6 py-3 text-base;
+  }
+
+  .floating-whatsapp {
+    @apply bottom-4 right-4 w-12 h-12;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    @apply border-2 border-white;
+  }
+  
+  .service-card {
+    @apply border-2 border-sage-300;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .floating-whatsapp:hover {
+    @apply transform-none;
+  }
+
+  .btn-primary:hover {
+    @apply transform-none;
+  }
+
+  .service-card:hover {
+    @apply transform-none;
+  }
+}
+
+/* Footer readability overrides */
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6 {
+  color: #FAFAF9 !important;
+}
+
+footer p,
+footer a,
+footer li,
+footer span,
+footer address {
+  color: rgba(250, 250, 249, 0.9) !important;
+}
+
+footer a:hover {
+  color: #ffffff !important;
+}

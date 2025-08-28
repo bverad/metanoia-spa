@@ -1,0 +1,291 @@
+# Metanoia Spa Landing Page - Cursor Rules
+# Stack: Astro + TypeScript + Tailwind CSS + Vercel
+# Project: Landing page estática con máximo performance y conversión
+
+## Core Technologies
+- Framework: Astro 4.x (SSG/Static Site Generation)
+- Language: TypeScript (strict mode)
+- Styling: Tailwind CSS 3.x
+- Package Manager: npm (lock file committed)
+- Deploy: Vercel
+- Analytics: Google Analytics 4
+
+## Project Structure
+```
+src/
+  components/     # Astro components (.astro files)
+  data/          # JSON data files (services, FAQ, site config)
+  lib/           # TypeScript utilities (analytics, SEO, schema)
+  pages/         # Astro pages (only index.astro for SPA)
+  styles/        # Global CSS and Tailwind config
+public/
+  images/        # Optimized static assets
+docs/            # Project documentation (PRD, architecture)
+```
+
+## Coding Standards
+
+### TypeScript Guidelines
+- Always use strict TypeScript mode
+- Prefer explicit types over `any`
+- Use interfaces for data structures (Service, FAQ, SiteConfig)
+- Export types from dedicated `.ts` files when shared
+- Use const assertions for immutable data
+- Prefer type imports: `import type { Service } from './types'`
+
+### Astro Component Best Practices
+- Use `.astro` extension for components
+- Prefer Astro components over framework components for static content
+- Use framework components (React/Preact) only for interactivity
+- Always specify explicit props with TypeScript interfaces
+- Use `---` frontmatter for server-side logic
+- Prefer static generation over client-side rendering
+
+### CSS/Tailwind Guidelines
+- Use Tailwind utility classes primarily
+- Create custom CSS only for complex animations or unique designs
+- Follow mobile-first responsive approach (`sm:`, `md:`, `lg:`, `xl:`)
+- Use semantic color names from our design system:
+  - `sage-*` for primary greens
+  - `cream-*` for warm neutrals  
+  - `copper-*` for accent colors
+- Prefer CSS custom properties for theme values
+- Use `@apply` sparingly, only for repeated complex patterns
+
+### File Naming Conventions
+- Components: PascalCase (`Hero.astro`, `ServiceCard.astro`)
+- Utilities: camelCase (`analytics.ts`, `seoHelpers.ts`)
+- Data files: kebab-case (`services.json`, `site-config.json`)
+- Assets: kebab-case (`hero-image.webp`, `service-icon.svg`)
+- Pages: kebab-case or index (`index.astro`)
+
+### Import Organization
+1. Astro and framework imports
+2. Third-party libraries
+3. Internal utilities and types
+4. Components (sorted alphabetically)
+5. Data imports
+6. Relative imports
+
+Example:
+```typescript
+---
+// Astro/Framework
+import type { GetStaticPaths } from 'astro';
+
+// Third-party
+import { trackEvent } from 'gtag';
+
+// Internal utilities
+import type { Service } from '../types';
+import { generateSchemaOrg } from '../lib/schemaOrg';
+
+// Components
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+
+// Data
+import services from '../data/services.json';
+---
+```
+
+## Performance Guidelines
+
+### Image Optimization
+- Use WebP/AVIF formats when possible
+- Implement responsive images with multiple sizes
+- Use `loading="lazy"` for below-the-fold images
+- Optimize for Core Web Vitals (LCP < 2.5s)
+- Store images in `public/images/` with organized subdirectories
+
+### Bundle Optimization
+- Minimize JavaScript bundles (prefer static generation)
+- Use dynamic imports for non-critical functionality
+- Implement code splitting for large components
+- Avoid unnecessary polyfills or large dependencies
+
+### SEO and Analytics
+- Include proper meta tags for all pages
+- Implement structured data (JSON-LD) for LocalBusiness
+- Use semantic HTML elements
+- Ensure proper heading hierarchy (h1 → h2 → h3)
+- Track conversion events with descriptive names
+
+## Component Patterns
+
+### Astro Component Template
+```astro
+---
+// TypeScript props interface
+interface Props {
+  title: string;
+  description?: string;
+  className?: string;
+}
+
+// Destructure props with defaults
+const { 
+  title, 
+  description = '', 
+  className = '' 
+} = Astro.props;
+
+// Server-side logic here
+---
+
+<section class={`component-base ${className}`}>
+  <h2 class="text-2xl font-semibold text-sage-700">
+    {title}
+  </h2>
+  {description && (
+    <p class="mt-4 text-neutral-600">
+      {description}
+    </p>
+  )}
+  <slot />
+</section>
+
+<style>
+  .component-base {
+    /* Custom styles only when Tailwind isn't sufficient */
+  }
+</style>
+```
+
+### Data Fetching Pattern
+```typescript
+// In component frontmatter
+import type { Service } from '../types';
+import servicesData from '../data/services.json';
+
+// Type-safe data access
+const services: Service[] = servicesData.categories.flatMap(cat => cat.services);
+const featuredServices = services.filter(service => service.featured);
+```
+
+## Accessibility Requirements
+- Use semantic HTML elements
+- Include proper ARIA labels and roles
+- Ensure keyboard navigation works
+- Maintain color contrast ratios (AA compliance)
+- Test with screen readers
+- Implement focus management for interactive elements
+
+## Analytics Implementation
+- Use consistent event naming: `click_whatsapp`, `click_instagram`, `service_view`
+- Include relevant parameters: `source`, `service_id`, `category`
+- Implement error boundaries for analytics failures
+- Respect user privacy preferences
+- Use TypeScript for event parameter validation
+
+## Error Handling
+- Use proper error boundaries in interactive components
+- Implement graceful fallbacks for failed API calls
+- Log errors appropriately without exposing sensitive data
+- Provide user-friendly error messages
+- Test error scenarios thoroughly
+
+## Testing Guidelines
+- Write unit tests for utility functions
+- Test component props and rendering
+- Validate JSON data schemas
+- Test analytics event firing
+- Verify accessibility with automated tools
+- Performance test with Lighthouse
+
+## Git Workflow
+- Use conventional commits: `feat:`, `fix:`, `docs:`, `style:`
+- Include meaningful commit messages
+- Test builds locally before pushing
+- Use feature branches for significant changes
+- Update documentation when needed
+
+## Environment Variables
+```
+# Required for production
+GA4_ID=G-XXXXXXXXXX
+SITE_URL=https://metanoiaspa.cl
+
+# Optional for development
+NODE_ENV=development
+```
+
+## Common Patterns to Follow
+
+### WhatsApp CTA Implementation
+```astro
+---
+import { trackEvent } from '../lib/analytics';
+
+interface Props {
+  source: 'hero' | 'card' | 'floating';
+  serviceId?: string;
+  message?: string;
+}
+
+const { source, serviceId, message = 'Hola, me interesa reservar una cita' } = Astro.props;
+const whatsappUrl = `https://wa.link/4k3hvn?text=${encodeURIComponent(message)}`;
+---
+
+<a 
+  href={whatsappUrl}
+  class="btn-primary"
+  target="_blank"
+  rel="noopener noreferrer"
+  onclick={`trackEvent('click_whatsapp', { source: '${source}', service_id: '${serviceId || ''}' })`}
+>
+  Reservar por WhatsApp
+</a>
+```
+
+### Service Card Pattern
+```astro
+---
+interface Service {
+  id: string;
+  name: string;
+  priceCLP: number;
+  description: string;
+  featured?: boolean;
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const formattedPrice = new Intl.NumberFormat('es-CL', {
+  style: 'currency',
+  currency: 'CLP',
+  minimumFractionDigits: 0
+}).format(service.priceCLP);
+---
+
+<div class="service-card">
+  <h3 class="text-xl font-semibold text-sage-700">{service.name}</h3>
+  <p class="mt-2 text-neutral-600">{service.description}</p>
+  <div class="mt-4 flex items-center justify-between">
+    <span class="price-highlight">{formattedPrice}</span>
+    <!-- WhatsApp CTA component here -->
+  </div>
+</div>
+```
+
+## Code Quality Rules
+- Run `npm run build` before commits to catch build errors
+- Use TypeScript strict mode
+- Follow ESLint and Prettier configurations
+- Validate JSON data against schemas
+- Optimize images before adding to repository
+- Keep components focused and single-responsibility
+- Document complex business logic
+- Use meaningful variable and function names
+
+## Performance Monitoring
+- Monitor Core Web Vitals in production
+- Track conversion funnel metrics
+- Measure page load times across devices
+- Monitor error rates and user experience
+- Use Vercel Analytics for real user monitoring
+
+Remember: This is a conversion-focused landing page. Every decision should consider impact on user experience, load times, and conversion to WhatsApp reservations.

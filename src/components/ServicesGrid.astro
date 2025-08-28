@@ -1,0 +1,56 @@
+---
+// Internal utilities and types
+import type { ServiceCategory } from '../types';
+import ServiceCard from './ServiceCard.astro';
+
+// TypeScript props interface
+interface Props {
+  categories: ServiceCategory[];
+  className?: string;
+}
+
+// Destructure props with defaults
+const { categories, className = '' } = Astro.props;
+---
+
+<section class={`section-spacing-large section-separator bg-white ${className}`} id="servicios">
+  <div class="section-container">
+    <div class="content-spacing-large">
+      <!-- Section Header -->
+      <div class="text-center">
+      <h2 class="mb-6">
+        Nuestros Servicios
+      </h2>
+      <p class="text-large text-neutral-600 max-w-4xl mx-auto">
+        Descubre nuestra amplia gama de tratamientos de spa y bienestar, 
+        diseñados para tu relajación, salud y belleza integral.
+      </p>
+    </div>
+
+    <!-- Categories -->
+    {categories.map((category, categoryIndex) => (
+      <div class={`mb-16 ${categoryIndex !== categories.length - 1 ? 'pb-16 border-b border-sage-100' : ''}`}>
+        <!-- Category Header -->
+        <div class="text-center mb-12">
+          <h3 class="text-2xl md:text-3xl font-semibold text-sage-800 mb-3">
+            {category.name}
+          </h3>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+          {category.services
+            .sort((a, b) => a.order - b.order)
+            .map((service) => (
+              <ServiceCard 
+                service={service} 
+                category={category.id}
+              />
+            ))
+          }
+        </div>
+      </div>
+    ))}
+    </div>
+  </div>
+</section>

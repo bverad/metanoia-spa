@@ -1,0 +1,55 @@
+---
+// Internal utilities and types
+import type { Service } from '../types';
+import ServiceCard from './ServiceCard.astro';
+
+// TypeScript props interface
+interface Props {
+  services: Service[];
+  className?: string;
+}
+
+// Destructure props with defaults
+const { services, className = '' } = Astro.props;
+---
+
+<section class={`section-spacing section-separator bg-sage-50 ${className}`} id="servicios-destacados">
+  <div class="section-container">
+    <div class="content-spacing">
+      <!-- Section Header -->
+      <div class="text-center">
+      <h2 class="mb-6">
+        Servicios Destacados
+      </h2>
+      <p class="text-large text-neutral-600 max-w-3xl mx-auto">
+        Nuestros tratamientos más populares para tu relajación y bienestar. 
+        Cada servicio está diseñado para brindarte la mejor experiencia.
+      </p>
+    </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+      {services.map((service) => (
+        <ServiceCard 
+          service={service} 
+          category="destacado"
+        />
+      ))}
+    </div>
+
+      <!-- CTA to see all services -->
+      <div class="text-center">
+      <a 
+        href="#servicios" 
+        class="btn-secondary inline-flex items-center"
+        onclick="import('../lib/analytics').then(({ track }) => track('click_see_all_services', { source: 'highlights' }))"
+      >
+        Ver Todos los Servicios
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>

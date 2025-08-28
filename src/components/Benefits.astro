@@ -1,0 +1,109 @@
+---
+// TypeScript props interface
+interface Props {
+  className?: string;
+}
+
+// Destructure props with defaults
+const { className = '' } = Astro.props;
+
+// Benefits data
+const benefits = [
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>`,
+    title: 'Cuidado Personalizado',
+    description: 'Cada tratamiento se adapta a tus necesidades específicas y objetivos de bienestar personal.'
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>`,
+    title: 'Profesionales Certificados',
+    description: 'Nuestro equipo cuenta con certificaciones y experiencia en técnicas de masaje y bienestar.'
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>`,
+    title: 'Ambiente Relajante',
+    description: 'Espacios diseñados para la tranquilidad, con música suave y aromaterapia natural.'
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>`,
+    title: 'Horarios Flexibles',
+    description: 'Abierto de lunes a sábado con horarios que se adaptan a tu rutina diaria.'
+  }
+];
+---
+
+<section class={`section-spacing section-separator bg-white ${className}`} id="beneficios">
+  <div class="section-container">
+    <div class="content-spacing">
+      <!-- Section Header -->
+      <div class="text-center">
+      <h2 class="mb-6">
+        ¿Por qué elegir Metanoia Spa?
+      </h2>
+      <p class="text-large text-neutral-600 max-w-3xl mx-auto">
+        Nos comprometemos con tu bienestar integral a través de un servicio excepcional 
+        y técnicas probadas para la relajación y el cuidado corporal.
+      </p>
+    </div>
+
+      <!-- Benefits Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {benefits.map((benefit) => (
+        <div class="text-center group">
+          <!-- Icon -->
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-sage-100 rounded-full mb-6 group-hover:bg-sage-200 transition-colors duration-300">
+            <svg 
+              class="w-8 h-8 text-sage-600" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+              set:html={benefit.icon}
+            >
+            </svg>
+          </div>
+          
+          <!-- Title -->
+          <h3 class="text-xl font-semibold text-sage-800 mb-3">
+            {benefit.title}
+          </h3>
+          
+          <!-- Description -->
+          <p class="text-neutral-600 leading-relaxed">
+            {benefit.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+      <!-- Trust indicators -->
+      <div class="pt-16 border-t border-sage-100">
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        
+        <!-- Years of experience -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-sage-700 mb-1">5+</div>
+          <div class="text-sm text-neutral-600">Años de experiencia</div>
+        </div>
+        
+        <!-- Happy clients -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-sage-700 mb-1">500+</div>
+          <div class="text-sm text-neutral-600">Clientes satisfechos</div>
+        </div>
+        
+        <!-- Services -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-sage-700 mb-1">16</div>
+          <div class="text-sm text-neutral-600">Servicios especializados</div>
+        </div>
+        
+        <!-- Location -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-sage-700 mb-1">★★★★★</div>
+          <div class="text-sm text-neutral-600">Ubicación céntrica</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

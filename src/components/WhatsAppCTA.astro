@@ -1,0 +1,30 @@
+---
+// Data imports
+import siteConfig from '../data/site.json';
+
+// Destructure props with defaults
+const { 
+  source, 
+  serviceId, 
+  message = 'Hola, me interesa reservar una cita', 
+  className = 'btn-primary' 
+} = Astro.props;
+
+// Generate WhatsApp URL with encoded message
+const whatsappMessage = encodeURIComponent(message);
+const whatsappUrl = `${siteConfig.whatsappUrl}?text=${whatsappMessage}`;
+
+// Generate analytics tracking code
+const trackingCode = `import('../lib/analytics').then(({ trackWhatsAppClick }) => trackWhatsAppClick('${source}', '${serviceId || ''}'))`;
+---
+
+<a 
+  href={whatsappUrl}
+  class={className}
+  target="_blank" 
+  rel="noopener noreferrer"
+  onclick={trackingCode}
+  aria-label={`Reservar por WhatsApp desde ${source}`}
+>
+  <slot />
+</a>

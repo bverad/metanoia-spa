@@ -1,0 +1,33 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Builds
+.dist/
+dist/
+.cache/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editors/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Coverage/Reports
+coverage/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Temporary
+.tmp/
+.temp/

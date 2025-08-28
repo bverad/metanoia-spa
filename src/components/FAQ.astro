@@ -1,0 +1,188 @@
+---
+// Internal utilities and types
+import type { FAQ as FAQType } from '../types';
+
+// TypeScript props interface
+interface Props {
+  faqs: FAQType[];
+  className?: string;
+}
+
+// Destructure props with defaults
+const { faqs, className = '' } = Astro.props;
+---
+
+<section class={`section-spacing section-separator bg-gradient-to-br from-sage-50 via-cream-50 to-sage-100 relative overflow-hidden ${className}`} id="faq">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-10 -left-20 w-40 h-40 bg-sage-200/30 rounded-full organic-shape"></div>
+    <div class="absolute bottom-10 -right-20 w-32 h-32 bg-copper-200/40 rounded-full organic-shape"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-cream-300/20 rounded-full organic-shape"></div>
+  </div>
+
+  <div class="section-container max-w-6xl mx-auto relative z-10">
+    <!-- Enhanced Section Header -->
+    <div class="text-center mb-20">
+      <!-- Icon -->
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl mb-6 shadow-lg">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      
+      <h2 class="mb-8">
+        Preguntas Frecuentes
+      </h2>
+      <p class="text-large text-neutral-600 max-w-4xl mx-auto">
+        Resolvemos las dudas más comunes sobre nuestros servicios, 
+        reservas y políticas para que tengas toda la información que necesitas.
+      </p>
+    </div>
+
+    <!-- Enhanced FAQ Grid - Centered -->
+    <div class="max-w-4xl mx-auto mb-16">
+      <div class="grid grid-cols-1 gap-6">
+      {faqs.map((faq, index) => (
+        <div class="group">
+          <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-sage-100/50 hover:border-sage-200">
+            <button 
+              class="w-full text-left p-6 lg:p-8 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:ring-offset-2"
+              onclick={`toggleFAQ(${index}); import('../lib/analytics').then(({ trackFAQExpand }) => trackFAQExpand(${index}))`}
+              aria-expanded="false"
+              aria-controls={`faq-content-${index}`}
+              id={`faq-button-${index}`}
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex items-start space-x-4 flex-1">
+                  <!-- Question number -->
+                  <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-sage-500 to-sage-600 text-white text-sm font-bold rounded-lg flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                  <!-- Question text -->
+                  <h3 class="text-lg lg:text-xl font-semibold text-sage-900 leading-tight pr-4 group-hover:text-sage-700 transition-colors">
+                    {faq.q}
+                  </h3>
+                </div>
+                <!-- Expand icon -->
+                <div class="flex-shrink-0 ml-4">
+                  <div class="w-10 h-10 bg-sage-100 rounded-full flex items-center justify-center group-hover:bg-sage-200 transition-colors">
+                    <svg 
+                      class="w-5 h-5 text-sage-600 transition-transform duration-300"
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      id={`faq-icon-${index}`}
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+            
+            <!-- Answer content -->
+            <div 
+              class="overflow-hidden transition-all duration-500 max-h-0 opacity-0"
+              id={`faq-content-${index}`}
+              aria-labelledby={`faq-button-${index}`}
+            >
+              <div class="px-6 lg:px-8 pb-6 lg:pb-8">
+                <div class="ml-12 border-l-2 border-sage-200 pl-6">
+                  <p class="text-neutral-700 leading-relaxed text-base lg:text-lg">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      </div>
+    </div>
+
+    <!-- Enhanced Contact CTA - Centered -->
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-sage-100/50 shadow-lg">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mb-6">
+          <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/>
+          </svg>
+        </div>
+        
+        <h3 class="text-2xl lg:text-3xl font-bold text-sage-900 mb-4">
+          ¿Tienes otra consulta?
+        </h3>
+        <p class="text-lg text-neutral-600 mb-8 max-w-md mx-auto">
+          Nuestro equipo está listo para resolver cualquier duda específica sobre nuestros servicios.
+        </p>
+        
+        <a 
+          href="https://wa.link/4k3hvn?text=Hola!%20Tengo%20una%20consulta%20que%20no%20est%C3%A1%20en%20las%20preguntas%20frecuentes."
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 text-white text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          onclick="import('../lib/analytics').then(({ trackWhatsAppClick }) => trackWhatsAppClick('faq'))"
+        >
+          <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.76 7.12c-.05-.11-.18-.18-.38-.31-.2-.14-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.14.2-.53.64-.65.77-.12.14-.24.16-.44.05-.2-.1-.85-.31-1.62-.99-.6-.53-1-.19-1.18-.02-.18.16-.22.26-.33.41-.1.14-.2.16-.37.05-.18-.1-.75-.28-1.43-.88-.63-.53-1.06-1.18-1.18-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.14-.2.2-.34.07-.14.04-.26-.02-.36-.06-.1-.44-1.07-.6-1.46-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.12 0-.32.05-.49.24-.17.2-.65.63-.65 1.54s.67 1.79.76 1.91c.1.12 1.32 2.02 3.2 2.83.45.19.8.31 1.07.4.45.14.86.12 1.18.07.36-.05 1.17-.48 1.33-.94.16-.46.16-.85.11-.94z"/>
+          </svg>
+          Chatear por WhatsApp
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Toggle Script -->
+<script>
+  function toggleFAQ(index: number) {
+    const button = document.getElementById(`faq-button-${index}`);
+    const content = document.getElementById(`faq-content-${index}`);
+    const icon = document.getElementById(`faq-icon-${index}`);
+    
+    if (!button || !content || !icon) return;
+    
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    
+    // Close all other FAQs
+    document.querySelectorAll('[id^="faq-button-"]').forEach((btn, i) => {
+      if (i !== index) {
+        btn.setAttribute('aria-expanded', 'false');
+        const otherContent = document.getElementById(`faq-content-${i}`);
+        const otherIcon = document.getElementById(`faq-icon-${i}`);
+        if (otherContent && otherIcon) {
+          otherContent.style.maxHeight = '0px';
+          otherContent.classList.remove('opacity-100');
+          otherContent.classList.add('opacity-0');
+          // Reset to plus icon
+          otherIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>';
+        }
+      }
+    });
+    
+    // Toggle current FAQ
+    if (isExpanded) {
+      button.setAttribute('aria-expanded', 'false');
+      content.style.maxHeight = '0px';
+      content.classList.remove('opacity-100');
+      content.classList.add('opacity-0');
+      // Change plus icon
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>';
+    } else {
+      button.setAttribute('aria-expanded', 'true');
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.classList.remove('opacity-0');
+      content.classList.add('opacity-100');
+      // Change to minus icon
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>';
+    }
+  }
+
+  // Make function globally available
+  (window as any).toggleFAQ = toggleFAQ;
+</script>

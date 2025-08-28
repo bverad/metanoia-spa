@@ -1,0 +1,184 @@
+---
+// TypeScript props interface
+interface Props {
+  className?: string;
+}
+
+// Destructure props with defaults
+const { className = '' } = Astro.props;
+---
+
+<section class={`section-spacing section-separator bg-gradient-to-br from-sage-50 via-cream-50 to-sage-100 relative overflow-hidden ${className}`} id="sobre">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-20 -left-32 w-64 h-64 bg-sage-200/20 rounded-full organic-shape animate-float"></div>
+    <div class="absolute bottom-20 -right-32 w-48 h-48 bg-copper-200/30 rounded-full organic-shape" style="animation: float 4s ease-in-out infinite reverse;"></div>
+    <div class="absolute top-1/2 left-1/3 w-32 h-32 bg-cream-300/25 rounded-full organic-shape" style="animation: float 5s ease-in-out infinite;"></div>
+  </div>
+
+  <div class="section-container relative z-10">
+    <div class="content-spacing-large">
+      
+      <!-- Enhanced Section Header -->
+      <div class="text-center mb-20">
+        <!-- Icon -->
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-sage-500 to-sage-600 rounded-3xl mb-8 shadow-xl">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </div>
+        
+        <h2 class="mb-8">
+          Sobre <span class="gradient-text">Metanoia Spa</span>
+        </h2>
+        <p class="text-hero max-w-4xl mx-auto">
+          Un espacio donde la transformación personal se encuentra con el bienestar integral
+        </p>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-16 xl:gap-24 items-start">
+        
+        <!-- Content Column -->
+        <div class="space-y-12">
+          
+          <!-- Mission Card -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-sage-100/50 shadow-lg">
+            <div class="flex items-start space-x-6">
+              <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="mb-4">Nuestra Misión</h3>
+                <p class="text-large text-neutral-700">
+                  Brindar terapias personalizadas de masaje, estética y cuidado integral, 
+                  realizadas por profesionales certificados, en un ambiente acogedor y accesible. 
+                  Nuestro propósito es aliviar el estrés, mejorar la salud y potenciar el bienestar 
+                  de cada persona que nos visita.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vision Card -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-sage-100/50 shadow-lg">
+            <div class="flex items-start space-x-6">
+              <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-copper-500 to-copper-600 rounded-2xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="mb-4">Nuestra Visión</h3>
+                <p class="text-large text-neutral-700">
+                  Ser el spa urbano de referencia en Providencia que transforma el bienestar 
+                  cotidiano de las personas, ayudándolas a reconectar con su equilibrio físico 
+                  y emocional a través de terapias profesionales y una experiencia cálida, 
+                  cercana y consistente.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Philosophy Card -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-sage-100/50 shadow-lg">
+            <div class="flex items-start space-x-6">
+              <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cream-500 to-cream-600 rounded-2xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="mb-4">Nuestra Filosofía</h3>
+                <p class="text-large text-neutral-700">
+                  Creemos que el bienestar verdadero surge de la conexión entre el cuerpo y la mente. 
+                  Nuestro nombre, inspirado en la palabra griega <em class="font-semibold text-sage-700">"metanoia"</em> 
+                  que significa transformación profunda, refleja nuestro compromiso con tu crecimiento personal.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Visual Column -->
+        <div class="space-y-8">
+          <!-- Main Image -->
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+              <div class="w-full h-full bg-gradient-to-br from-sage-100 via-cream-100 to-sage-200 flex items-center justify-center">
+                <div class="text-center p-8">
+                  <svg class="w-20 h-20 mx-auto mb-6 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  <h4 class="text-2xl font-bold text-sage-700 mb-3">Instalaciones del Spa</h4>
+                  <p class="text-sage-600">Ambiente acogedor y profesional diseñado para tu bienestar</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Floating decorative cards -->
+            <div class="absolute -top-6 -right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-sage-100/50">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-sage-700">5+</div>
+                <div class="text-sm text-neutral-600">Años</div>
+              </div>
+            </div>
+            
+            <div class="absolute -bottom-6 -left-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-sage-100/50">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-copper-600">500+</div>
+                <div class="text-sm text-neutral-600">Clientas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Values Grid -->
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-sage-100/50 shadow-lg">
+              <div class="w-12 h-12 bg-gradient-to-br from-sage-500 to-sage-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-sage-900 mb-2">Profesionalismo</h4>
+              <p class="text-sm text-neutral-600">Certificaciones y técnicas actualizadas</p>
+            </div>
+            
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-sage-100/50 shadow-lg">
+              <div class="w-12 h-12 bg-gradient-to-br from-copper-500 to-copper-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-sage-900 mb-2">Calidez Humana</h4>
+              <p class="text-sm text-neutral-600">Atención personalizada y cercana</p>
+            </div>
+            
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-sage-100/50 shadow-lg">
+              <div class="w-12 h-12 bg-gradient-to-br from-cream-500 to-cream-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-sage-900 mb-2">Calidad</h4>
+              <p class="text-sm text-neutral-600">Productos y equipos de primera</p>
+            </div>
+            
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-sage-100/50 shadow-lg">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-sage-900 mb-2">Confianza</h4>
+              <p class="text-sm text-neutral-600">Resultados consistentes y seguros</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

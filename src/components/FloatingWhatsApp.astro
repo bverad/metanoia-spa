@@ -1,0 +1,60 @@
+---
+// Data imports
+import siteConfig from '../data/site.json';
+
+// Generate WhatsApp URL
+const whatsappMessage = encodeURIComponent('Hola! Me gustaría consultar sobre sus servicios de spa y bienestar.');
+const whatsappUrl = `${siteConfig.whatsappUrl}?text=${whatsappMessage}`;
+---
+
+<!-- Enhanced Floating WhatsApp Button -->
+<div class="fixed bottom-6 right-6 z-50 group">
+  <!-- Pulse animation ring -->
+  <div class="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-75"></div>
+  
+  <!-- Main button -->
+  <div class="relative">
+    <a 
+      href={whatsappUrl}
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 group-hover:from-green-600 group-hover:to-green-700"
+      onclick="import('../lib/analytics').then(({ trackWhatsAppClick }) => trackWhatsAppClick('floating'))"
+      aria-label="Contactar por WhatsApp"
+      style="animation: pulse-glow 2s ease-in-out infinite"
+    >
+      <!-- WhatsApp Icon -->
+      <svg class="w-8 h-8 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.76 7.12c-.05-.11-.18-.18-.38-.31-.2-.14-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.14.2-.53.64-.65.77-.12.14-.24.16-.44.05-.2-.1-.85-.31-1.62-.99-.6-.53-1-.19-1.18-.02-.18.16-.22.26-.33.41-.1.14-.2.16-.37.05-.18-.1-.75-.28-1.43-.88-.63-.53-1.06-1.18-1.18-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.14-.2.2-.34.07-.14.04-.26-.02-.36-.06-.1-.44-1.07-.6-1.46-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.12 0-.32.05-.49.24-.17.2-.65.63-.65 1.54s.67 1.79.76 1.91c.1.12 1.32 2.02 3.2 2.83.45.19.8.31 1.07.4.45.14.86.12 1.18.07.36-.05 1.17-.48 1.33-.94.16-.46.16-.85.11-.94z"/>
+      </svg>
+      
+      <!-- Notification dot -->
+      <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Tooltip (appears on hover) -->
+<div class="fixed bottom-6 right-20 bg-sage-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 pointer-events-none transition-opacity duration-200 z-40" id="whatsapp-tooltip">
+  ¡Reserva tu cita!
+</div>
+
+<script>
+  // Add hover tooltip functionality
+  const floatingButton = document.querySelector('.floating-whatsapp');
+  const tooltip = document.getElementById('whatsapp-tooltip');
+  
+  if (floatingButton && tooltip) {
+    floatingButton.addEventListener('mouseenter', () => {
+      tooltip.classList.remove('opacity-0');
+      tooltip.classList.add('opacity-100');
+    });
+    
+    floatingButton.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('opacity-100');
+      tooltip.classList.add('opacity-0');
+    });
+  }
+</script>

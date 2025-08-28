@@ -1,0 +1,128 @@
+---
+// Internal utilities and types
+import type { ServicesData, SiteConfig, FAQ as FAQType } from '../types';
+import { defaultSEO } from '../lib/seo';
+import { generateCombinedSchema } from '../lib/schemaOrg';
+
+// Components
+import Layout from '../components/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Benefits from '../components/Benefits.astro';
+import ServicesHighlights from '../components/ServicesHighlights.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import About from '../components/About.astro';
+import LocationHours from '../components/LocationHours.astro';
+import FAQ from '../components/FAQ.astro';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+
+// Data imports
+import servicesData from '../data/services.json';
+import siteConfig from '../data/site.json';
+import faqData from '../data/faq.json';
+
+// Type-safe data access
+const services: ServicesData = servicesData;
+const config: SiteConfig = siteConfig;
+const faqs: FAQType[] = faqData;
+
+// Get featured services for highlights section
+const featuredServices = services.categories.flatMap(cat => 
+  cat.services.filter(service => service.featured)
+).sort((a, b) => a.order - b.order);
+
+// Generate structured data
+const structuredData = generateCombinedSchema(config, featuredServices);
+---
+
+<Layout 
+  title={defaultSEO.title}
+  description={defaultSEO.description}
+  structuredData={structuredData}
+>
+  <!-- Navigation -->
+  <Navigation />
+  
+  <main>
+    <!-- Hero Section -->
+    <Hero />
+    
+    <!-- Benefits Section -->
+    <Benefits />
+    
+    <!-- Featured Services -->
+    <ServicesHighlights services={featuredServices} />
+    
+    <!-- Complete Services Catalog -->
+    <ServicesGrid categories={services.categories} />
+    
+    <!-- About Section -->
+    <About />
+    
+    <!-- Location and Hours -->
+    <LocationHours config={config} />
+    
+    <!-- FAQ Section -->
+    <FAQ faqs={faqs} />
+    
+    <!-- Floating WhatsApp CTA -->
+    <FloatingWhatsApp />
+  </main>
+</Layout>
+
+<!-- Analytics initialization script -->
+<script>
+  // Initialize Google Analytics if GA4_ID is available
+  const gaId = import.meta.env.PUBLIC_GA4_ID;
+  if (gaId && typeof window !== 'undefined') {
+    import('../lib/analytics').then(({ initAnalytics }) => {
+      initAnalytics(gaId);
+    });
+  }
+
+  // Scroll depth tracking
+  let maxScroll = 0;
+  let scrollTimeouts: number[] = [];
+
+  function trackScrollDepth() {
+    const scrolled = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    
+    if (scrolled > maxScroll && scrolled % 25 === 0) {
+      maxScroll = scrolled;
+      import('../lib/analytics').then(({ trackScrollDepth }) => {
+        trackScrollDepth(scrolled);
+      });
+    }
+  }
+
+  // Debounced scroll tracking
+  window.addEventListener('scroll', () => {
+    scrollTimeouts.forEach(clearTimeout);
+    scrollTimeouts.push(setTimeout(trackScrollDepth, 100) as any);
+  });
+
+  // Service view tracking with intersection observer
+  const serviceCards = document.querySelectorAll('[data-service-id]');
+  const observedServices = new Set();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const serviceId = entry.target.getAttribute('data-service-id');
+        const category = entry.target.getAttribute('data-category');
+        
+        if (serviceId && category && !observedServices.has(serviceId)) {
+          observedServices.add(serviceId);
+          import('../lib/analytics').then(({ trackServiceView }) => {
+            trackServiceView(serviceId, category);
+          });
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  serviceCards.forEach(card => observer.observe(card));
+</script>
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={structuredData}></script>

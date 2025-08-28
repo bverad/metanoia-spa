@@ -1,0 +1,231 @@
+---
+// Internal utilities and types
+import WhatsAppCTA from './WhatsAppCTA.astro';
+
+// Data imports
+import siteConfig from '../data/site.json';
+
+// Destructure props with defaults
+const { className = '' } = Astro.props;
+---
+
+<section class={`relative overflow-hidden bg-gradient-to-br from-sage-50 via-cream-50 to-sage-100 hero-spacing ${className}`} id="hero">
+  <!-- Advanced Background decorative elements with animations -->
+  <div class="absolute inset-0 overflow-hidden">
+    <!-- Animated organic shapes -->
+    <div class="absolute top-10 -right-32 w-96 h-96 bg-gradient-to-br from-sage-200/30 to-sage-300/20 rounded-full organic-shape animate-float" style="animation-delay: 0s;"></div>
+    <div class="absolute bottom-20 -left-32 w-80 h-80 bg-gradient-to-br from-cream-200/40 to-cream-300/25 rounded-full organic-shape animate-float" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-1/3 left-1/4 w-48 h-48 bg-gradient-to-br from-copper-200/20 to-copper-300/15 rounded-full organic-shape animate-float" style="animation-delay: 3s;"></div>
+    
+    <!-- Subtle grid pattern -->
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 1px 1px, var(--sage-400) 1px, transparent 0); background-size: 20px 20px;"></div>
+  </div>
+
+  <div class="relative section-container">
+    <div class="content-spacing-large">
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-16 xl:gap-20 items-center">
+
+        <!-- Left glass panel vignette for depth -->
+        <div class="pointer-events-none absolute -inset-x-8 -top-16 -bottom-16">
+          <div class="hidden xl:block absolute -left-24 top-12 w-80 h-80 rounded-3xl bg-white/30 backdrop-blur-md shadow-2xl" style="mask-image: radial-gradient(circle at 30% 30%, black, transparent 70%);"></div>
+        </div>
+        
+        <!-- Enhanced Content Column -->
+        <div class="text-center xl:text-left space-y-8">
+          <!-- Premium Badge with maximum visibility -->
+          <div class="flex justify-center xl:justify-start mb-8 relative z-20">
+            <div class="inline-flex items-center group relative">
+              <!-- Enhanced glow effect behind badge -->
+              <div class="absolute inset-0 bg-gradient-to-r from-sage-500/40 to-copper-500/40 rounded-full blur-xl opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-110"></div>
+              
+              <!-- Main badge with stronger contrast -->
+              <div class="relative bg-white border-2 border-sage-300 rounded-full px-8 py-4 shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:scale-105 group-hover:border-sage-400 z-10">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-sage-600 to-sage-700 rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm md:text-base font-bold text-sage-800 uppercase tracking-wider">Profesionales Certificados</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main heading with premium typography -->
+          <div class="space-y-6">
+            <h1 class="hero-title leading-tight">
+              <span class="block text-sage-900">Metanoia Spa</span>
+              <span class="block gradient-text">&amp; Bienestar</span>
+            </h1>
+            
+            <!-- Enhanced decorative line -->
+            <div class="flex justify-center xl:justify-start">
+              <div class="relative">
+                <div class="w-32 h-2 bg-gradient-to-r from-sage-500 via-copper-500 to-sage-600 rounded-full shadow-lg"></div>
+                <div class="absolute inset-0 w-32 h-2 bg-gradient-to-r from-sage-400 via-copper-400 to-sage-500 rounded-full opacity-50 blur-sm"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Subtitle -->
+          <div class="space-y-6">
+            <p class="text-hero max-w-2xl mx-auto xl:mx-0">
+              Un espacio para la <span class="font-semibold text-sage-700">transformación personal</span>, el equilibrio y el cuidado integral del cuerpo y la mente.
+            </p>
+            
+            <p class="text-body-large text-neutral-600 max-w-xl mx-auto xl:mx-0">
+              Desconecta del estrés diario y reconecta contigo mismo/a en nuestro santuario de bienestar.
+            </p>
+          </div>
+
+          <!-- Enhanced Location badge -->
+          <div class="flex items-center justify-center xl:justify-start">
+            <div class="group">
+              <div class="bg-white/90 backdrop-blur-sm border border-sage-200/50 rounded-2xl px-6 py-4 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-sage-500 to-sage-600 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="font-bold text-sage-900">Providencia, Santiago</p>
+                    <p class="text-sm text-neutral-600">Ubicación céntrica y accesible</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Premium CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-6 justify-center xl:justify-start">
+            <!-- Primary WhatsApp CTA -->
+            <div class="group">
+              <WhatsAppCTA 
+                source="hero" 
+                message="Hola! Me interesa reservar una cita para relajarme y cuidar mi bienestar."
+                className="relative bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center"
+              >
+                <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur"></div>
+                <div class="relative flex items-center space-x-3">
+                  <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/>
+                    </svg>
+                  </div>
+                  <span>Reservar Cita</span>
+                  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </div>
+              </WhatsAppCTA>
+            </div>
+            
+            <!-- Secondary CTA -->
+            <a 
+              href="#servicios" 
+              class="group bg-white/80 backdrop-blur-sm border-2 border-sage-300 hover:border-sage-400 text-sage-700 hover:text-sage-800 px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center"
+              onclick="import('../lib/analytics').then(({ track }) => track('click_see_services', { source: 'hero' }))"
+            >
+              <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 bg-sage-200 group-hover:bg-sage-300 rounded-full flex items-center justify-center transition-colors duration-300">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  </svg>
+                </div>
+                <span>Ver Servicios</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Trust indicators -->
+          <div class="flex flex-wrap justify-center xl:justify-start gap-8 pt-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-sage-700 mb-1">5+</div>
+              <div class="text-sm text-neutral-600">Años</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-sage-700 mb-1">500+</div>
+              <div class="text-sm text-neutral-600">Clientas</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-sage-700 mb-1">★★★★★</div>
+              <div class="text-sm text-neutral-600">Excelencia</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhanced Image Column -->
+        <div class="relative">
+          <!-- Main image container with premium effects -->
+          <div class="relative">
+            <!-- Glow effect behind image -->
+            <div class="absolute inset-0 bg-gradient-to-br from-sage-300/40 to-copper-300/30 rounded-3xl blur-2xl transform scale-110"></div>
+            
+            <!-- Main image -->
+            <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/50">
+              <div class="aspect-[4/5] w-full bg-gradient-to-br from-sage-100 via-cream-100 to-sage-200 flex items-center justify-center">
+                <div class="text-center p-8">
+                  <div class="w-24 h-24 bg-white/60 backdrop-blur-sm rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+                    <svg class="w-12 h-12 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-2xl font-bold text-sage-700 mb-3">Ambiente del Spa</h3>
+                  <p class="text-sage-600">Espacio diseñado para tu transformación personal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Floating information cards -->
+          <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-sage-100/50 z-20">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-sage-500 to-sage-600 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold text-sage-900">Horarios</p>
+                <p class="text-sm text-neutral-600">{siteConfig.hours}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute -top-6 -right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-sage-100/50 z-20">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-copper-500 to-copper-600 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold text-sage-900">Ubicación</p>
+                <p class="text-sm text-neutral-600">Centro de Santiago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced scroll indicator -->
+  <div class="text-center pb-12 bg-gradient-to-b from-transparent to-white/30">
+    <div class="inline-flex flex-col items-center space-y-2 animate-float">
+      <p class="text-sm text-sage-600 font-medium">Descubre más</p>
+      <div class="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+        <svg class="w-4 h-4 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave-like divider for smooth transition -->
+<div class="hero-divider"></div>

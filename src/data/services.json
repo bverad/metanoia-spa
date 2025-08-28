@@ -1,0 +1,181 @@
+{
+  "categories": [
+    {
+      "id": "masajes-terapeuticos",
+      "name": "Masajes Terapéuticos",
+      "services": [
+        {
+          "id": "relajacion",
+          "name": "Masaje de Relajación",
+          "priceCLP": 29990,
+          "description": "Terapia suave y envolvente que ayuda a liberar tensiones, reducir el estrés y brindar descanso profundo.",
+          "durationMin": 60,
+          "featured": true,
+          "order": 1
+        },
+        {
+          "id": "descontracturante",
+          "name": "Masaje Descontracturante",
+          "priceCLP": 34990,
+          "description": "Ideal para aliviar contracturas y rigidez muscular, enfocándose en zonas de mayor tensión.",
+          "durationMin": 60,
+          "featured": true,
+          "order": 2
+        },
+        {
+          "id": "cervical",
+          "name": "Tratamiento Cervical",
+          "priceCLP": 34990,
+          "description": "Masaje especializado en cuello y hombros para aliviar dolor, rigidez y mejorar la movilidad.",
+          "durationMin": 45,
+          "featured": false,
+          "order": 3
+        },
+        {
+          "id": "lumbar",
+          "name": "Tratamiento Lumbar",
+          "priceCLP": 34990,
+          "description": "Terapia localizada en la zona baja de la espalda, perfecta para molestias por malas posturas o esfuerzo físico.",
+          "durationMin": 45,
+          "featured": false,
+          "order": 4
+        },
+        {
+          "id": "deportivo",
+          "name": "Tratamiento Deportivo",
+          "priceCLP": 27990,
+          "description": "Masaje de alta intensidad para preparar músculos, prevenir lesiones o recuperar después del ejercicio.",
+          "durationMin": 45,
+          "featured": true,
+          "order": 5
+        },
+        {
+          "id": "embarazadas",
+          "name": "Masaje para Embarazadas",
+          "priceCLP": 34990,
+          "description": "Terapia segura y cuidadosa que alivia dolores, mejora la circulación y reduce la retención de líquidos.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 6
+        },
+        {
+          "id": "craneal",
+          "name": "Masaje Craneal",
+          "priceCLP": 9990,
+          "description": "Técnica relajante en cabeza y cuero cabelludo, ideal contra el estrés, el insomnio y dolores de cabeza.",
+          "durationMin": 30,
+          "featured": false,
+          "order": 7
+        },
+        {
+          "id": "reflexologia",
+          "name": "Reflexología Podal",
+          "priceCLP": 14990,
+          "description": "Masaje en puntos específicos de los pies que estimula órganos internos y promueve el bienestar integral.",
+          "durationMin": 30,
+          "featured": false,
+          "order": 8
+        }
+      ]
+    },
+    {
+      "id": "tratamientos-esteticos",
+      "name": "Tratamientos Estéticos y Corporales",
+      "services": [
+        {
+          "id": "reductivo",
+          "name": "Tratamiento Reductivo",
+          "priceCLP": 34990,
+          "description": "Masaje con técnicas firmes que ayudan a moldear la figura y reducir medidas.",
+          "durationMin": 60,
+          "featured": true,
+          "order": 1
+        },
+        {
+          "id": "reafirmante",
+          "name": "Tratamiento Reafirmante",
+          "priceCLP": 34990,
+          "description": "Mejora la firmeza y elasticidad de la piel, aportando un aspecto más tonificado.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 2
+        },
+        {
+          "id": "gluteos",
+          "name": "Masaje de Levantamiento de Glúteos",
+          "priceCLP": 21990,
+          "description": "Terapia estética enfocada en reafirmar, tonificar y realzar la zona de los glúteos.",
+          "durationMin": 45,
+          "featured": false,
+          "order": 3
+        },
+        {
+          "id": "anticelulitico",
+          "name": "Masaje Anticelulítico",
+          "priceCLP": 34990,
+          "description": "Masaje intenso que ayuda a mejorar la circulación y reducir la apariencia de la celulitis.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 4
+        },
+        {
+          "id": "exfoliacion-hidratacion",
+          "name": "Exfoliación + Hidratación Corporal",
+          "priceCLP": 24990,
+          "description": "Ritual que elimina células muertas y nutre la piel en profundidad para un acabado suave y radiante.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 5
+        }
+      ]
+    },
+    {
+      "id": "cuidado-facial-spa",
+      "name": "Cuidado Facial y Spa",
+      "services": [
+        {
+          "id": "limpieza-facial",
+          "name": "Limpieza Facial Profunda",
+          "priceCLP": 24990,
+          "description": "Tratamiento que elimina impurezas, puntos negros y revitaliza la piel, dejándola fresca y luminosa.",
+          "durationMin": 60,
+          "featured": true,
+          "order": 1
+        },
+        {
+          "id": "spa-pies",
+          "name": "Spa de Pies (Exfoliación + Reflexología)",
+          "priceCLP": 24990,
+          "description": "Tratamiento completo para pies cansados que combina limpieza profunda y masaje relajante.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "drenaje-linfatico",
+      "name": "Drenaje Linfático (D.L.M.)",
+      "services": [
+        {
+          "id": "dlm-manual",
+          "name": "D.L.M. (Drenaje Linfático Manual)",
+          "priceCLP": 29990,
+          "description": "Masaje suave que estimula el sistema linfático, favoreciendo la eliminación de líquidos y toxinas.",
+          "durationMin": 60,
+          "featured": true,
+          "order": 1
+        },
+        {
+          "id": "dlm-postoperatorio",
+          "name": "D.L.M. Postoperatorio",
+          "priceCLP": 34990,
+          "description": "Tratamiento especializado para recuperación post cirugía, reduce inflamación y acelera la regeneración.",
+          "durationMin": 60,
+          "featured": false,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}
