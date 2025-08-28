@@ -18,7 +18,6 @@
   },
   "deploy": {
     "startCommand": "npm run preview -- --host --port $PORT",
-    "healthcheckPath": "/",
     "numReplicas": 1,
     "sleepApplication": false
   }
