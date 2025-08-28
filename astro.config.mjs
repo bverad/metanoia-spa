@@ -13,7 +13,12 @@ export default defineConfig({
   // Permite el healthcheck de Railway en modo preview
   vite: {
     preview: {
-      allowedHosts: ['healthcheck.railway.app']
+      // Permitir healthchecks y cualquier host de proxy/CDN en Railway
+      allowedHosts: 'any'
+    },
+    server: {
+      // Por si se usa astro dev en entornos remotos
+      allowedHosts: 'any'
     }
   }
 });
