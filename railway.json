@@ -1,9 +1,13 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "name": "metanoia-spa",
+  "vars": {
+    "NPM_CONFIG_CACHE": "/tmp/.npm",
+    "CI": "true"
+  },
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "npm ci && npm run build",
+    "buildCommand": "npm install --no-fund --no-audit && npm run build",
     "watchPaths": [
       "src/**",
       "public/**",
