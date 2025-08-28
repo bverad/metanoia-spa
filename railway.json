@@ -1,0 +1,21 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "name": "metanoia-spa",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "npm ci && npm run build",
+    "watchPaths": [
+      "src/**",
+      "public/**",
+      "package.json",
+      "astro.config.mjs",
+      "tailwind.config.mjs"
+    ]
+  },
+  "deploy": {
+    "startCommand": "npm run preview -- --host --port $PORT",
+    "healthcheckPath": "/",
+    "numReplicas": 1,
+    "sleepApplication": false
+  }
+}
