@@ -10,5 +10,10 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto'
   },
-  // Vite config can be removed for simplicity
+  // Permite el healthcheck de Railway en modo preview
+  vite: {
+    preview: {
+      allowedHosts: ['healthcheck.railway.app']
+    }
+  }
 });
