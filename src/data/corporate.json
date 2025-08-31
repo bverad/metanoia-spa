@@ -1,0 +1,28 @@
+{
+  "id": "corporate-masajes-express",
+  "title": "Masajes Express en tu Empresa",
+  "subtitle": "Bienestar en solo 15 minutos",
+  "bullets": [
+    "Masaje descontracturante en silla ergonómica (in-office)",
+    "10 a 20 minutos por persona (sin interrumpir la jornada)",
+    "Instalación rápida, espacio mínimo y cero complicaciones",
+    "Alivia tensiones, mejora el ánimo y previene dolores posturales"
+  ],
+  "benefits": [
+    "Reduce el estrés y la tensión muscular acumulada",
+    "Mejora la concentración y el rendimiento laboral",
+    "Aumenta la motivación y el bienestar general",
+    "Disminuye el ausentismo y mejora el clima laboral",
+    "Refuerza el compromiso y la valoración del equipo"
+  ],
+  "priceCLPPerPerson": 10000,
+  "capacityExample": "En 3 horas se puede atender hasta 10 personas",
+  "contact": {
+    "brand": "Metanoia Spa",
+    "phone": "+56 9 3535 0691",
+    "email": "reservas.spa@spametanoia.com",
+    "instagram": "@spa__metanoia"
+  },
+  "whatsappMessage": "Hola, quiero cotizar Masajes Express en mi empresa: cantidad de personas, horario estimado y dirección. Gracias."
+}
+

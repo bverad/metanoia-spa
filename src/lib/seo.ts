@@ -12,7 +12,12 @@ export const defaultSEO: SEOData = {
     'masaje relajación',
     'masaje descontracturante',
     'spa chile',
-    'bienestar santiago'
+    'bienestar santiago',
+    // Corporativo
+    'masajes corporativos',
+    'masajes para empresas',
+    'bienestar en la oficina',
+    'pausas activas'
   ],
   og: {
     type: 'website',

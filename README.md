@@ -52,6 +52,7 @@ SITE_URL=https://metanoiaspa.cl
 - `src/data/services.json`: catálogo de servicios
 - `src/data/site.json`: marca, dirección, horarios, redes
 - `src/data/faq.json`: preguntas frecuentes
+ - `src/data/corporate.json` (opcional): contenido de “Masajes Express en tu Empresa”
 
 ## 🛡️ Calidad y estilo
 - TypeScript strict
@@ -74,6 +75,18 @@ SITE_URL=https://metanoiaspa.cl
 5. Añadir dominio desde la sección Domains.
 
 > Alternativa: Vercel (framework Astro detectado automáticamente). Output: `dist`.
+
+## 🧱 Sección Empresas — Masajes Express en tu Empresa
+- Bloque destacado en la landing con:
+  - Título: “Masajes Express en tu Empresa”
+  - Subtítulo: “Bienestar en solo 15 minutos”
+  - Bullets: silla ergonómica; 10–20 minutos por persona; en tu oficina; beneficios claros
+  - Precio de referencia: $10.000 por persona; capacidad de ejemplo: hasta 10 personas en 3 horas
+  - CTA WhatsApp con `source: corporate` y mensaje prellenado para cotización
+
+Edición de contenido:
+- Opción A: editar directamente el componente si es copy fijo
+- Opción B: usar `src/data/corporate.json` para separar contenido y permitir ajustes sin tocar código
 
 ## 🔐 Licencia
 Este proyecto es de uso interno del cliente. Si necesitas una Licencia OSS, ajusta esta sección.

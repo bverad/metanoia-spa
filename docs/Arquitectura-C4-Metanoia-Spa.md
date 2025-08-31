@@ -33,6 +33,11 @@ El diagrama de contexto muestra cómo el sistema de la landing page interactúa 
 - **Comportamiento**: Navegación móvil-first, decisión rápida, preferencia por WhatsApp
 - **Clusters**: Trabajadores estresados, deportistas, postoperatorio, embarazadas, estético
 
+#### Empresa / RR.HH.
+- **Descripción**: Líderes de equipo, RR.HH., Office Managers
+- **Necesidades**: Llevar bienestar a la oficina con mínima fricción y sin interrumpir la jornada
+- **Comportamiento**: Búsqueda orientada a beneficios medibles (estrés, ausentismo, rendimiento); contacto por WhatsApp con datos de cotización
+
 #### Propietario del Spa (Usuario Administrativo)
 - **Descripción**: Administrador del negocio que gestiona contenido y precios
 - **Necesidades**: Actualizar catálogo, modificar precios, añadir promociones
@@ -44,6 +49,7 @@ El diagrama de contexto muestra cómo el sistema de la landing page interactúa 
 - **Función**: Canal principal de conversión y atención al cliente
 - **Integración**: Enlaces directos `wa.link/4k3hvn` con mensaje predefinido
 - **Importancia**: Crítica - es el único método de reserva
+ - **Extensión corporativa**: mensaje prellenado para solicitudes de empresa (nº de personas, horario, dirección)
 
 #### Instagram (@spa__metanoia)
 - **Función**: Marketing visual y prueba social
@@ -79,6 +85,7 @@ El sistema se compone de 3 contenedores principales que trabajan en conjunto par
   - Islas de hidratación solo donde se necesita JavaScript
   - SEO técnico integrado (meta tags, schema.org)
   - Mobile-first responsive design
+  - Sección Empresas (corporativo) servida estáticamente con CTA dedicado
 
 ### Data Files (JSON)
 - **Ubicación**: `src/data/`
@@ -86,6 +93,7 @@ El sistema se compone de 3 contenedores principales que trabajan en conjunto par
   - `services.json`: Catálogo completo con precios y categorías
   - `faq.json`: Preguntas frecuentes
   - `site.json`: Configuración general (contacto, horarios, redes)
+  - `corporate.json` (opcional): Copy, beneficios y datos operativos del servicio corporativo
 - **Ventajas**:
   - Edición sin conocimiento técnico
   - Versionado en Git
@@ -105,7 +113,7 @@ El sistema se compone de 3 contenedores principales que trabajan en conjunto par
 ### Flujo de Datos
 1. **Build Time**: Astro lee JSON files y genera HTML estático
 2. **Runtime**: Cliente recibe assets optimizados vía CDN
-3. **Interacción**: JavaScript mínimo para analytics y acordeones
+3. **Interacción**: JavaScript mínimo para analytics, acordeones y tracking específico del bloque corporativo
 4. **Actualización**: Git push → build automático → deploy
 
 ---
@@ -141,6 +149,12 @@ La aplicación web se estructura en componentes Astro reutilizables, cada uno co
 - **Archivo**: `src/components/About.astro`
 - **Función**: Construcción de confianza y credibilidad
 - **Contenido**: Misión, visión, certificaciones profesionales
+
+#### Corporate Section
+- **Archivo**: `src/components/CorporateSection.astro`
+- **Función**: Presentar “Masajes Express en tu Empresa” con beneficios, operación y CTA
+- **Contenido**: Título, subtítulo, bullets (silla ergonómica, 10–20 min), precio por persona, capacidad ejemplo, CTA WhatsApp (source: corporate)
+- **Analytics**: Track `click_whatsapp` con `source: "corporate"`
 
 #### Location & Hours
 - **Archivo**: `src/components/LocationHours.astro`
@@ -186,11 +200,15 @@ La aplicación web se estructura en componentes Astro reutilizables, cada uno co
 - **Datos**: Dirección, horarios, servicios, contacto
 - **SEO**: Mejora resultados en búsquedas locales
 
+#### SEO Library (extensión corporativa)
+- **Función**: Añadir `Service` JSON‑LD para el servicio corporativo
+- **Datos**: nombre del servicio, precio por persona, área de servicio (oficinas), proveedor
+
 ### Flujo de Interacción
 1. **Carga inicial**: Hero visible inmediatamente (LCP)
 2. **Navegación**: Scroll suave entre secciones
 3. **Descubrimiento**: Filtros de servicios, expandir FAQ
-4. **Conversión**: Multiple touchpoints a WhatsApp
+4. **Conversión**: Multiple touchpoints a WhatsApp (incl. bloque corporativo)
 5. **Analytics**: Cada interacción se trackea para optimización
 
 ---

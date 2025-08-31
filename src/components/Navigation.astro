@@ -6,6 +6,7 @@ import siteConfig from '../data/site.json';
 const navigationItems = [
   { name: 'Inicio', href: '#hero', current: true },
   { name: 'Servicios', href: '#servicios', current: false },
+  { name: 'Empresas', href: '#empresas', current: false },
   { name: 'Sobre Nosotros', href: '#sobre', current: false },
   { name: 'Ubicación', href: '#ubicacion', current: false },
   { name: 'FAQ', href: '#faq', current: false }
@@ -110,7 +111,7 @@ const navigationItems = [
         {navigationItems.map((item) => (
           <a
             href={item.href}
-            class="block px-4 py-3 text-base font-medium text-neutral-700 hover:text-sage-700 hover:bg-sage-50 rounded-lg transition-colors"
+            class="block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 text-neutral-700 hover:text-sage-800 hover:bg-cream-50 border-l-2 border-transparent hover:border-l-copper-300 transform hover:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-300"
             onclick="closeMobileMenu(); setActiveNavItem(this.getAttribute('href'))"
           >
             {item.name}

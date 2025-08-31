@@ -22,6 +22,7 @@
 - Formato de datos: JSON para catálogo de servicios y FAQ centralizados.
 - Lint/Format: ESLint + Prettier.
 - Deploy: Vercel o Netlify (preferencia: Vercel por DX + preview URLs).
+  - Alternativa: Railway sirviendo `dist/` como sitio estático mediante servidor HTTP ligero.
 
 ## 3) Arquitectura y Estructura de Proyecto
 ```
@@ -42,11 +43,13 @@
       LocationHours.astro
       FAQ.astro
       FloatingWhatsapp.astro
+      CorporateSection.astro
       Footer.astro
     data/
       services.json
       faq.json
       site.json
+      corporate.json (opcional)
     lib/
       analytics.ts
       seo.ts
@@ -60,7 +63,7 @@
 ```
 
 ### Páginas y rutas
-- `/` única página con anclas: `#servicios`, `#sobre`, `#ubicacion`, `#faq`, `#contacto`.
+- `/` única página con anclas: `#servicios`, `#empresas`, `#sobre`, `#ubicacion`, `#faq`, `#contacto`.
 
 ### Componentes clave
 - `Hero`: título, subtítulo, CTA WhatsApp, CTA “Ver servicios”, badges.
@@ -114,12 +117,43 @@
   "hours": "Lun–Vier 9:00–19:00, Sáb 9:00–17:00"
 }
 ```
+ - `corporate.json` (opcional):
+```json
+{
+  "id": "corporate-masajes-express",
+  "title": "Masajes Express en tu Empresa",
+  "subtitle": "Bienestar en solo 15 minutos",
+  "bullets": [
+    "Masajes descontracturantes en silla ergonómica",
+    "Duración de 10 a 20 minutos por persona",
+    "En tu lugar de trabajo, sin interrumpir la jornada",
+    "Reduce el estrés, mejora el ánimo y previene dolores"
+  ],
+  "benefits": [
+    "Reduce el estrés y la tensión muscular",
+    "Mejora la concentración y el rendimiento",
+    "Aumenta la motivación y el bienestar",
+    "Disminuye el ausentismo y mejora el clima laboral",
+    "Refuerza el compromiso del equipo"
+  ],
+  "priceCLPPerPerson": 10000,
+  "capacityExample": "En 3 horas se puede atender hasta 10 personas",
+  "contact": {
+    "brand": "Metanoia Spa",
+    "phone": "+56 9 3535 0691",
+    "email": "reservas.spa@spametanoia.com",
+    "instagram": "@spa__metanoia"
+  },
+  "whatsappMessage": "Hola, quiero cotizar Masajes Express para mi empresa (nº personas, horario, dirección)."
+}
+```
 
 ## 5) SEO Técnico y Metadatos
 - Meta y Open Graph desde `lib/seo.ts`.
 - Datos estructurados JSON‑LD: `LocalBusiness` + `Service` por categoría.
 - Canonical, favicon, manifest básico.
 - Sitemap y robots simples (aunque sea one‑page, útil para SEO local).
+ - Extensión corporativa: incluir `Service` adicional para “Masajes Express en tu Empresa” y keywords corporativas ("masajes corporativos", "bienestar en la oficina").
 
 Ejemplo `LocalBusiness` (inyectado en `<head>`):
 ```json
@@ -161,6 +195,7 @@ export const defaultSEO = {
   - `click_instagram`.
   - `click_map`.
   - `service_view` (visible en viewport; debounced).
+  - Extensión corporativa: disparar `click_whatsapp` con `source: "corporate"` desde la sección Empresas.
 
 Helper (`lib/analytics.ts`):
 ```ts
@@ -183,6 +218,7 @@ Uso en CTA WhatsApp de `ServiceCard`:
 - JS mínimo: islas sólo donde haya interacción (FAQ/filters), resto estático.
 - LCP objetivo < 2.5s en 4G; presupuesto: < 300KB inicial.
 - Accesibilidad: roles y atributos ARIA en acordeones; foco visible; contraste AA; labels.
+ - Sección Empresas: jerarquía clara, bullets legibles, CTA con foco visible y tamaño táctil adecuado.
 
 ## 8) Seguridad y Buenas Prácticas
 - Enlaces externos con `rel="noopener noreferrer"`.
@@ -206,11 +242,13 @@ Uso en CTA WhatsApp de `ServiceCard`:
   - Espaciado: base 4px.
   - Tipografía: sistema o Inter/Work Sans (si se decide usar).
 - Modo: mobile‑first, breakpoints `sm`, `md`, `lg`.
+ - Bloque “Empresas”: fondo suave `cream-*`/`sage-*`, titulares `text-hero`/`text-large`, íconos alineados con el sistema, uso selectivo de `!important` donde Tailwind no sea suficiente.
 
 ## 12) Detalles de Implementación por Sección
 - Hero: imagen ligera o fondo de color; botón WhatsApp prominente; sub‑CTA “Ver servicios” hace scroll a `#servicios`.
 - Servicios destacados: 4–6 `featured=true` del JSON.
 - Catálogo: render por categorías; filtro simple por tabs (aria-selected, keyboard nav).
+ - Empresas (CorporateSection): bloque con título, subtítulo, beneficios, detalles operativos (duración, silla ergonómica, capacidad), precio por persona y CTA WhatsApp con `source="corporate"`.
 - Sobre: misión y visión (del PRD); badges de certificación (texto si no hay logos aún).
 - Ubicación/Horarios: iframe de Google Maps con `title` accesible; horarios en lista.
 - FAQ: acordeón con `<button aria-expanded>` y contenido colapsable.
@@ -221,6 +259,7 @@ Uso en CTA WhatsApp de `ServiceCard`:
 - Documentación de edición de `services.json`/`faq.json`.
 - Guía rápida de publicación (Vercel) y variables.
 - Archivos `robots.txt`, `sitemap.xml`, `manifest.webmanifest` mínimos.
+ - Documentación y datos para sección corporativa (`corporate.json` si se usa) y cómo activarla/ocultarla.
 
 ## 14) Riesgos Técnicos y Mitigación
 - Falta de imágenes reales: placeholders optimizados → reemplazo sin cambios de código.

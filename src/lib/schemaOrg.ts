@@ -129,13 +129,108 @@ export const generateWebsiteSchema = (): string => {
   return JSON.stringify(website, null, 2);
 };
 
-// Generate combined schema for the landing page  
-export const generateCombinedSchema = (siteConfig: SiteConfig, _services: Service[]): string => {
-  const schemas = [
+// Minimal Service schema (category optional)
+export const generateServiceSchemaBasic = (service: Service): string => {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `https://metanoiaspa.cl/#service-${service.id}`,
+    'name': service.name,
+    'description': service.description,
+    'provider': {
+      '@type': 'LocalBusiness',
+      'name': 'Metanoia Spa y Bienestar',
+      '@id': 'https://metanoiaspa.cl/#business'
+    },
+    'offers': {
+      '@type': 'Offer',
+      'price': service.priceCLP,
+      'priceCurrency': 'CLP',
+      'availability': 'https://schema.org/InStock',
+      'validFrom': new Date().toISOString()
+    },
+    'duration': service.durationMin ? `PT${service.durationMin}M` : undefined
+  };
+
+  return JSON.stringify(schema, null, 2);
+};
+
+// ItemList schema for a category of services
+export const generateItemListForCategory = (category: ServiceCategory): string => {
+  const list = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `https://metanoiaspa.cl/#itemlist-${category.id}`,
+    'name': `Servicios — ${category.name}`,
+    'itemListElement': category.services
+      .sort((a, b) => a.order - b.order)
+      .map((service, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'url': `https://metanoiaspa.cl/#service-${service.id}`,
+        'name': service.name
+      }))
+  };
+
+  return JSON.stringify(list, null, 2);
+};
+
+// Generate combined schema for the landing page
+export const generateCombinedSchema = (
+  siteConfig: SiteConfig,
+  services: Service[] = [],
+  corporate?: { id: string; title: string; priceCLPPerPerson: number },
+  categories: ServiceCategory[] = []
+): string => {
+  const schemas: any[] = [
     JSON.parse(generateLocalBusinessSchema(siteConfig)),
     JSON.parse(generateOrganizationSchema(siteConfig)),
     JSON.parse(generateWebsiteSchema())
   ];
+
+  // Add individual Service schemas
+  services.forEach((svc) => {
+    try {
+      schemas.push(JSON.parse(generateServiceSchemaBasic(svc)));
+    } catch (_) {
+      // ignore malformed services
+    }
+  });
+
+  // Add ItemList per category
+  categories.forEach((cat) => {
+    try {
+      schemas.push(JSON.parse(generateItemListForCategory(cat)));
+    } catch (_) {
+      // ignore malformed categories
+    }
+  });
+
+  // Add corporate service schema if provided
+  if (corporate) {
+    const corpSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `https://metanoiaspa.cl/#service-${corporate.id}`,
+      'name': corporate.title,
+      'description': 'Masajes express en oficina para equipos: 10–20 minutos por persona en silla ergonómica.',
+      'serviceType': 'Corporativo',
+      'provider': {
+        '@type': 'LocalBusiness',
+        'name': 'Metanoia Spa y Bienestar',
+        '@id': 'https://metanoiaspa.cl/#business'
+      },
+      'areaServed': 'Oficinas en Santiago (in-office)',
+      'offers': {
+        '@type': 'Offer',
+        'price': corporate.priceCLPPerPerson,
+        'priceCurrency': 'CLP',
+        'availability': 'https://schema.org/InStock',
+        'category': 'Corporate'
+      }
+    };
+    schemas.push(corpSchema);
+  }
 
   return JSON.stringify(schemas, null, 2);
 };

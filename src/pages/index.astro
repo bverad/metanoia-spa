@@ -11,6 +11,7 @@ import Hero from '../components/Hero.astro';
 import Benefits from '../components/Benefits.astro';
 import ServicesHighlights from '../components/ServicesHighlights.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
+import CorporateSection from '../components/CorporateSection.astro';
 import About from '../components/About.astro';
 import LocationHours from '../components/LocationHours.astro';
 import FAQ from '../components/FAQ.astro';
@@ -20,19 +21,31 @@ import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import servicesData from '../data/services.json';
 import siteConfig from '../data/site.json';
 import faqData from '../data/faq.json';
+import corporateData from '../data/corporate.json';
 
 // Type-safe data access
 const services: ServicesData = servicesData;
 const config: SiteConfig = siteConfig;
 const faqs: FAQType[] = faqData;
+const corporate = corporateData as any;
 
 // Get featured services for highlights section
-const featuredServices = services.categories.flatMap(cat => 
-  cat.services.filter(service => service.featured)
-).sort((a, b) => a.order - b.order);
+const featuredServices = services.categories
+  .flatMap(cat => cat.services.filter(service => service.featured))
+  .sort((a, b) => a.order - b.order);
 
-// Generate structured data
-const structuredData = generateCombinedSchema(config, featuredServices);
+// Flatten all services for full JSON-LD coverage
+const allServices = services.categories
+  .flatMap(cat => cat.services)
+  .sort((a, b) => a.order - b.order);
+
+// Generate structured data (include featured services and corporate service)
+const structuredData = generateCombinedSchema(
+  config,
+  allServices,
+  { id: (corporate?.id as string) || 'corporate-masajes-express', title: (corporate?.title as string) || 'Masajes Express en tu Empresa', priceCLPPerPerson: (corporate?.priceCLPPerPerson as number) || 10000 },
+  services.categories
+);
 ---
 
 <Layout 
@@ -56,6 +69,9 @@ const structuredData = generateCombinedSchema(config, featuredServices);
     <!-- Complete Services Catalog -->
     <ServicesGrid categories={services.categories} />
     
+    <!-- Corporate Services Section -->
+    <CorporateSection data={corporate} />
+
     <!-- About Section -->
     <About />
     

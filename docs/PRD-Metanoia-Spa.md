@@ -20,7 +20,7 @@ Brindar terapias personalizadas de masaje, estética y cuidado integral, realiza
 - Objetivo de usuario: descubrir servicios con sus precios, entender beneficios y reservar de manera simple e inmediata.
 
 ## 2) Alcance (MVP)
-Landing de una sola página con secciones: Hero, Beneficios, Servicios destacados, Catálogo por categorías, Sobre Metanoia, Ubicación/Mapa + Horarios, CTA WhatsApp persistente, Instagram, FAQ y Footer. Incluye SEO on-page básico y analíticas (GA4).
+Landing de una sola página con secciones: Hero, Beneficios, Servicios destacados, Catálogo por categorías, Sección Empresas (Masajes Express en tu Empresa), Sobre Metanoia, Ubicación/Mapa + Horarios, CTA WhatsApp persistente, Instagram, FAQ y Footer. Incluye SEO on-page básico y analíticas (GA4).
 
 Fuera de alcance MVP: sistema de reservas interno, pagos online, blog, multilenguaje.
 
@@ -37,6 +37,7 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 | Estético/imagen | Personas 20–50 enfocadas en estética | Reductivo, reafirmante, anticelulítico, glúteos | Escepticismo sobre resultados | Eventos sociales, verano | “Protocolos firmes + guía de hábitos, resultados visibles.” |
 | Dolor crónico localizado | Adultos 25–60 con cervicalgia/lumbalgia | Tratamiento focalizado y alivio funcional | Temor a recidivas, costo | Brotes de dolor por postura/estrés | “Evaluación breve + técnica específica para tu zona de dolor.” |
 | Turista/visitante | Visitantes en Santiago | Acceso rápido, ubicación y horario | Desconocimiento del sector | Estancias cortas | “Spa céntrico en Providencia, agenda inmediata por WhatsApp.” |
+| Empresa / RR.HH. | Líderes de equipo, RR.HH., Office Managers | Bienestar in-office, mínimo tiempo, logística simple | Interrupción de jornada, costo, productividad | Peaks de estrés, cierres, campañas internas de bienestar | “Bienestar en solo 15 minutos en tu oficina. Masaje express que mejora ánimo y rendimiento.” |
 
 ### Implicancias para la landing
 - CTA WhatsApp visible en todo momento (flotante + en tarjetas de servicio).
@@ -50,6 +51,7 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
   - Beneficios (relajación, personalización, ambiente acogedor, profesionales certificados)
   - Servicios destacados (4–6 con precio y CTA)
   - Catálogo por categorías (todas las categorías con items: nombre, breve descripción, precio, CTA)
+  - Empresas — Masajes Express en tu Empresa (beneficios, cómo funciona, precio por persona, capacidad, CTA WhatsApp con mensaje corporativo)
   - Sobre Metanoia (misión, visión, certificaciones)
   - Ubicación y horarios (mapa Google embebido + horarios)
   - FAQ (3–5 preguntas)
@@ -109,6 +111,13 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - D.L.M. Postoperatorio — $34.990
   - Especializado para recuperación post cirugía; reduce inflamación y acelera regeneración.
 
+#### Corporativo (Empresas)
+- Masajes Express en tu Empresa — $10.000 por persona
+  - Bienestar in-office en solo 10 a 20 minutos por persona, en silla ergonómica.
+  - En 3 horas se puede atender hasta 10 personas (ejemplo de capacidad).
+  - En tu lugar de trabajo, sin interrumpir la jornada; ideal para liberar tensiones, mejorar el ánimo y prevenir dolores.
+  - Beneficios clave para la empresa: reduce estrés y tensión muscular, mejora concentración y rendimiento, aumenta motivación y bienestar general, disminuye ausentismo y mejora el clima laboral, refuerza compromiso del equipo.
+
 ### Modelo de contenido sugerido (para implementación)
 - Servicio: `id`, `nombre`, `categoria`, `precioCLP`, `descripcion`, `duracionMin` (opcional), `destacado` (bool), `orden`.
 
@@ -119,6 +128,7 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - Mapa embebido (Google) y bloque de horarios.
 - FAQ desplegable.
 - Diseño mobile-first.
+ - Sección “Empresas” con: descripción del servicio Masajes Express, beneficios, cómo funciona (duración 10–20 min, en silla ergonómica), precio por persona ($10.000), capacidad de ejemplo (hasta 10 personas en 3 horas) y CTA a WhatsApp con mensaje prellenado para solicitudes corporativas.
 
 ## 7) Requisitos No Funcionales
 - Performance: LCP < 2.5s en 4G, peso inicial < 300KB.
@@ -127,20 +137,22 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - Seguridad: HTTPS, sin almacenamiento de PII.
 
 ## 8) SEO (Local)
-- Keywords: “spa providencia”, “masajes santiago”, “drenaje linfático providencia”, “masaje relajación”.
+- Keywords: “spa providencia”, “masajes santiago”, “drenaje linfático providencia”, “masaje relajación”, “masajes para empresas”, “masajes corporativos santiago”, “pausas activas”, “bienestar en la oficina”.
 - Meta título: “Metanoia Spa – Masajes y Bienestar en Providencia”.
 - Meta descripción: 150–160 caracteres con CTA a reservar.
 - Datos estructurados: `LocalBusiness` con dirección, horarios, URL y WhatsApp.
 
 ## 9) Analíticas y Métricas
 - GA4: `page_view`, `click_whatsapp`, `click_instagram`, `click_mapa`, `scroll_depth`.
-- KPI: CTR a WhatsApp, tasa de conversión a contacto, tiempo en página, ranking SEO local.
+- Parámetros: en `click_whatsapp` usar `source` = `hero` | `card` | `floating` | `corporate` y `service_id` cuando aplique.
+- KPI: CTR a WhatsApp (incl. fuente corporate), tasa de conversión a contacto, tiempo en página, ranking SEO local y búsquedas relacionadas a corporativo.
 
 ## 10) Diseño / UI
 - Estilo: cálido, relajante, confiable. Paleta: verdes suaves, beige/crema, acentos cobre.
 - Tipografía: Sans legible (p. ej., Inter, Work Sans).
 - Imaginería: texturas naturales, luz cálida. Evitar stock genérico evidente.
 - Componentes: tarjetas de servicio, acordeones FAQ, CTA flotante.
+ - Sección “Empresas”: bloque destacado con fondo sutil, íconos de beneficios, layout centrado y CTA prominente; jerarquía tipográfica clara con titular “Masajes Express en tu Empresa — Bienestar en solo 15 minutos”.
 
 ## 11) Tecnología (sugerido)
 - Framework: Next.js o Astro (generación estática), Tailwind CSS.
@@ -151,6 +163,7 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - Semana 1: Wireframes low‑fi + copy final.
 - Semana 2: UI high‑fi + desarrollo estático + SEO on-page.
 - Semana 3: QA, performance y accesibilidad, publicación.
+ - Extensión 1 (Corporativo): diseño y publicación de sección “Empresas” + tracking GA4 específico.
 
 ## 13) Criterios de Aceptación (MVP)
 - Catálogo muestra todas las categorías y precios.
@@ -159,6 +172,7 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - Carga móvil aceptable y sin errores de consola.
 - SEO básico: título, descripción, OG y JSON‑LD `LocalBusiness` presentes.
 - GA4 registra clics de WhatsApp e Instagram.
+ - Sección “Empresas” visible con copy, precio por persona y CTA WhatsApp con `source="corporate"`.
 
 ## 14) Riesgos y Mitigaciones
 - Falta de imágenes reales: usar placeholders de alta calidad → reemplazar post‑lanzamiento.
@@ -171,14 +185,17 @@ Metodología: agrupación de segmentos basada en necesidades, motivaciones y com
 - ¿Servicios “destacados” para priorizar en la homepage?
 - ¿Promociones/paquetes iniciales?
 - ¿Teléfono alternativo además de `wa.link`?
+ - ¿Disponibilidad y logística para servicio corporativo (días/horas, comunas cubiertas)?
+ - ¿Mensaje predefinido para WhatsApp corporativo (ej.: “Hola, quiero cotizar Masajes Express para mi empresa…”) y datos mínimos a solicitar (nº personas, horario, dirección)?
 
 ---
 
 ## Anexo: Estructura de navegación propuesta
-- Hero → Beneficios → Destacados → Catálogo → Sobre → Ubicación/Horarios → FAQ → Redes/Footer.
+- Hero → Beneficios → Destacados → Catálogo → Empresas → Sobre → Ubicación/Horarios → FAQ → Redes/Footer.
 
 ## Anexo: Copys base sugeridos
 - Hero título: “Metanoia Spa & Bienestar”.
 - Hero subtítulo: “Un espacio para la relajación, el equilibrio y el cuidado integral del cuerpo y la mente.”
 - CTA principal: “Reservar por WhatsApp”.
 - Badges: “Profesionales certificados”, “En Providencia”.
+ - Empresas (titular): “Masajes Express en tu Empresa”. Subtítulo: “Bienestar en solo 15 minutos”. Bullets: “Silla ergonómica”, “10–20 minutos por persona”, “Hasta 10 personas en 3 horas”, “En tu oficina, sin interrumpir la jornada”. CTA: “Solicitar información corporativa por WhatsApp”.

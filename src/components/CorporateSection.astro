@@ -1,0 +1,136 @@
+---
+import { trackWhatsAppClick } from '../lib/analytics';
+
+interface CorporateData {
+  id: string;
+  title: string;
+  subtitle: string;
+  bullets: string[];
+  benefits: string[];
+  priceCLPPerPerson: number;
+  capacityExample: string;
+  contact?: {
+    brand?: string;
+    phone?: string;
+    email?: string;
+    instagram?: string;
+  };
+  whatsappMessage?: string;
+}
+
+interface Props {
+  data?: CorporateData;
+}
+
+const { data } = Astro.props;
+
+const defaultData: CorporateData = {
+  id: 'corporate-masajes-express',
+  title: 'Masajes Express en tu Empresa',
+  subtitle: 'Bienestar en solo 15 minutos',
+  bullets: [
+    'Masajes descontracturantes en silla ergonómica',
+    'Duración de 10 a 20 minutos por persona',
+    'En tu lugar de trabajo, sin interrumpir la jornada',
+    'Ideal para liberar tensiones, mejorar el ánimo y prevenir dolores'
+  ],
+  benefits: [
+    'Reduce el estrés y la tensión muscular acumulada',
+    'Mejora la concentración y el rendimiento laboral',
+    'Aumenta la motivación y el bienestar general',
+    'Disminuye el ausentismo y mejora el clima laboral',
+    'Refuerza el compromiso y la valoración del equipo'
+  ],
+  priceCLPPerPerson: 10000,
+  capacityExample: 'En 3 horas se puede atender hasta 10 personas',
+  contact: {
+    brand: 'Metanoia Spa',
+    phone: '+56 9 3535 0691',
+    email: 'reservas.spa@spametanoia.com',
+    instagram: '@spa__metanoia'
+  },
+  whatsappMessage:
+    'Hola, quiero cotizar Masajes Express para mi empresa (nº personas, horario, dirección).'
+};
+
+const corporate = data ?? defaultData;
+const formattedPrice = new Intl.NumberFormat('es-CL', {
+  style: 'currency',
+  currency: 'CLP',
+  minimumFractionDigits: 0
+}).format(corporate.priceCLPPerPerson);
+
+const whatsappUrl = `https://wa.link/4k3hvn?text=${encodeURIComponent(corporate.whatsappMessage ?? defaultData.whatsappMessage!)}`;
+---
+
+<section id="empresas" class="section-spacing bg-cream-50/80">
+  <div class="section-container">
+    <div class="mx-auto max-w-5xl text-center">
+      <h2 class="text-3xl md:text-4xl font-semibold text-sage-800 hero-title">{corporate.title}</h2>
+      <p class="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-cream-200 text-sage-800 text-body-large shadow-sm">
+        <span class="h-2 w-2 rounded-full bg-copper-400"></span>
+        {corporate.subtitle}
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-2">
+      <div class="relative rounded-2xl p-6 md:p-8 bg-white/70 backdrop-blur-md shadow-elevated border border-cream-200">
+        <h3 class="text-xl font-semibold text-sage-800">¿Cómo funciona?</h3>
+        <ul class="mt-4 space-y-3 text-neutral-700">
+          {corporate.bullets.map((b) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-copper-400 shadow-[0_0_0_3px_rgba(203,146,122,0.15)]"></span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="rounded-xl border border-cream-200 bg-cream-50 p-4 text-left">
+            <div class="text-sm text-neutral-600">Precio por persona</div>
+            <div class="mt-1 text-2xl font-bold text-sage-800">{formattedPrice}</div>
+          </div>
+          <div class="rounded-xl border border-cream-200 bg-cream-50 p-4 text-left">
+            <div class="text-sm text-neutral-600">Capacidad estimada</div>
+            <div class="mt-1 text-2xl font-bold text-sage-800">{corporate.capacityExample}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative rounded-2xl p-6 md:p-8 bg-gradient-to-b from-white/80 to-cream-50/80 backdrop-blur-md shadow-elevated border border-cream-200">
+        <h3 class="text-xl font-semibold text-sage-800">Beneficios para tu empresa</h3>
+        <ul class="mt-4 space-y-3 text-neutral-700">
+          {corporate.benefits.map((b) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-sage-500 shadow-[0_0_0_3px_rgba(28,108,96,0.15)]"></span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8 flex flex-col items-center gap-3">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+            onclick={`(${trackWhatsAppClick.toString()})('corporate')`}
+          >
+            Solicitar información por WhatsApp
+          </a>
+          <div class="text-sm text-neutral-600">
+            {corporate.contact?.brand} · {corporate.contact?.phone} · {corporate.contact?.email}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .shadow-elevated {
+      box-shadow: 0 10px 30px rgba(16, 24, 40, 0.06), 0 2px 6px rgba(16, 24, 40, 0.04);
+    }
+  </style>
+</section>
+
+
